@@ -30,9 +30,10 @@ export default function HomePage(props) {
   const handleInput = (e) => {
     const searchStr = e.target.value.toLowerCase()
     setSearchInput(searchStr)
-    const filteredList = [...data].filter((i) =>
+    const filteredList = data.filter((i) =>
       i.name.toLowerCase().includes(searchStr)
     )
+    setFilteredData(filteredList); // update the filteredData state
   }
 
   const handleSelect = (e) => {
@@ -77,6 +78,7 @@ export default function HomePage(props) {
 
   useEffect(() => {
     data && setFilteredData(data)
+    console.log(filteredData);
   }, [data])
 
   return (
@@ -113,7 +115,7 @@ export default function HomePage(props) {
             {error && <p>Error...</p>}
             {loading && <LoadingSpinner />}
             {filteredData && (
-              <ProductsBox filteredProducts={filterByCat(filteredData)} />
+             <ProductsBox filteredProducts={filterByCat(filteredData)} />
             )}
           </ErrorBoundary>
         </Col>
