@@ -1,4 +1,4 @@
-import React, { useReducer, useContext, createContext } from 'react'
+import React, { useReducer, useContext, createContext, useEffect } from 'react'
 
 const initialState = {
   cart: [],
@@ -36,7 +36,7 @@ const reducer = (state, action) => {
       } else {
         nextCart.push(action.payload)
       }
-
+      
       return {
         ...state,
         cart: nextCart,
@@ -99,6 +99,7 @@ export const useCart = () => {
 const useProvideCart = () => {
   const { state, dispatch } = useCart()
 
+
   const addItem = (item) => {
     dispatch({
       type: 'ADD_ITEM',
@@ -130,7 +131,7 @@ const useProvideCart = () => {
     return !!state.cart.find((item) => item._id === id)
   }
 
-  /*  Check for saved local cart on load and dispatch to set initial state
+  // Check for saved local cart on load and dispatch to set initial state
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem('KenzieCart')) || false
     if (savedCart) {
@@ -139,7 +140,7 @@ const useProvideCart = () => {
         payload: savedCart,
       })
     }
-  }, [dispatch]) */
+  }, [dispatch])
 
   return {
     state,

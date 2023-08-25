@@ -27,7 +27,7 @@ export default function CartItem({ item }) {
                   className='item-link one-line-ellipsis'
                   onClick={closeSidebar}
                 >
-                  <h4>Product Name</h4>
+                  <h4>{item.name}</h4>
                 </Link>
               </div>
             </Col>
