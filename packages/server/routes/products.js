@@ -8,7 +8,7 @@ import { requireAuth } from "../middleware";
 router.get("/", async (request, response) => {
   const products = await Product.find({}).sort({ created: -1 });
 
-  response.json(products);
+  response.json(products.map((products) => products.toJSON()));
 });
 
 router.post("/", async (request, response) => {
@@ -23,7 +23,7 @@ router.post("/", async (request, response) => {
 });
 
 router.get("/:id", async (request, response) => {
-  const product = await Product.exists({ _id: request.params.id });
+  const product = await Product.findById(request.params.id)
 
   if (product) {
     response.json(product.toJSON());
